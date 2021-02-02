@@ -19,3 +19,4 @@ function yearsToMonths(year) {
 }
 
 calculateMortgage (200000, 6.5, 30);
+ 
