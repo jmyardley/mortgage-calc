@@ -23,7 +23,6 @@ function createSchedule() {
     var thisPrincipal = 0;
     var allInterest = 0;
     var allPrincipal = 0;
-    console.log(r);
     $("<tr><th>Payment</th><th>Interest</th><th>Principal</th><th>Balance</th></tr>").appendTo("#table");
     for (var i=0; i<n; i++)  {
         thisInterest = r * p;
@@ -31,14 +30,15 @@ function createSchedule() {
         p = p - thisPrincipal;
         allInterest = allInterest + thisInterest;
         allPrincipal = allPrincipal + thisPrincipal;
-        console.log(thisInterest.toFixed(2), thisPrincipal.toFixed(2), p.toFixed(2));
-        $("<tr>" +
+        $("<tr scope=`row`>" +
         "  <td class='amortization-first-column'>" + (i + 1)                                     + "</td>" +
         "  <td>" + thisInterest.toFixed(2)  + "</td>" +
         "  <td>" + thisPrincipal.toFixed(2) + "</td>" +
         "  <td>" + Math.abs(p).toFixed(2)  + "</td>" +
-        "</tr>").appendTo("#table ");
+        "</tr>").appendTo("#table");
     }
+
+    $("#totals").text("Total Interest: " + allInterest.toFixed(2).toString());
     } 
 
     
