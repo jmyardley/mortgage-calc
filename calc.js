@@ -3,44 +3,43 @@
 //param r = float interest rate
 //param n = number of years 
 function calculatePayment() {
-    var cost = document.getElementById("cost").value;
-    var downPayment = document.getElementById("downPayment").value;
-    var rateInput = document.getElementById("apr").value;
-    var period = document.getElementById("period").value;
+    var p = document.getElementById("principal").value;
+    var n = document.getElementById("period").value * 12;
+    var r = document.getElementById("apr").value / 100 / 12;
     
-    var p = cost - downPayment;
-    var r = convertToDecimal (rateInput);
-    var n = yearsToMonths(period);
     var c = ((p * r) * Math.pow((1 + r), n)) / (Math.pow((1 + r), n) - 1);
-    pmt = c.toFixed(2);
-    return parseFloat(pmt);
-}
-
-function convertToDecimal(percent) {
-    return (percent/12)/100;
-}
-
-function yearsToMonths(year) {
-    return year * 12;
+    return parseFloat(c);
 }
 
 //calculateMortgage (200000, 6.5, 30);
 
 function createSchedule() {
     var pmt = calculatePayment();
+    var n = document.getElementById("period").value * 12;
+    var r = document.getElementById("apr").value / 100 / 12;
+    var p = document.getElementById("principal").value;
 
     var thisInterest = 0;
     var thisPrincipal = 0;
     var allInterest = 0;
     var allPrincipal = 0;
-    var 
+    console.log(r);
+    for (var i=0; i<n; i++)  {
+        thisInterest = r * p;
+        thisPrincipal = pmt - thisInterest;
+        p = p - thisPrincipal;
+        allInterest = allInterest + thisInterest;
+        allPrincipal = allPrincipal + thisPrincipal;
+        console.log(thisInterest.toFixed(2), thisPrincipal.toFixed(2), p.toFixed(2));
+    } 
+
+    
 } 
 
 
 var btn = document.getElementById("calculate");
 btn.onclick = function () {
-    console.log(cost, downPayment, apr, period);
-    console.log(pmt);
+    createSchedule();    
 }
 
  
